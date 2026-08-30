@@ -1,127 +1,93 @@
 import streamlit as st
 
-# Page settings
 st.set_page_config(
     page_title="AI Study Assistant",
     page_icon="📚"
 )
 
-# Title
 st.title("📚 AI Study Assistant")
 st.write("Learn smarter. Study better. 🚀")
 
 st.divider()
 
-# Topic input
-st.header("🎯 Choose a topic")
+st.header("🎯 Create Your Study Plan")
 
 topic = st.text_input(
-    "Enter a subject or topic:",
+    "What do you want to study?",
     placeholder="Example: Python, Data Structures, Physics"
 )
 
-# Study content
-study_data = {
-    "python": {
-        "explanation": "Python is a beginner-friendly programming language used for web development, automation, data science, and artificial intelligence.",
-        "plan": [
-            "Learn variables and data types",
-            "Learn if-else statements",
-            "Learn loops",
-            "Learn functions",
-            "Practice small programs"
-        ],
-        "questions": [
-            "What is a variable in Python?",
-            "What is the difference between a list and a tuple?",
-            "What is a for loop used for?"
-        ]
-    },
+study_time = st.selectbox(
+    "⏱️ How much time do you have?",
+    ["30 minutes", "1 hour", "2 hours"]
+)
 
-    "data structures": {
-        "explanation": "Data structures are ways of organizing and storing data so that it can be used efficiently.",
-        "plan": [
-            "Learn arrays and lists",
-            "Learn stacks and queues",
-            "Learn linked lists",
-            "Learn trees",
-            "Learn graphs"
-        ],
-        "questions": [
-            "What is a stack?",
-            "What is a queue?",
-            "What is the difference between an array and a linked list?"
-        ]
-    },
+difficulty = st.selectbox(
+    "📊 Choose your level:",
+    ["Beginner", "Intermediate", "Advanced"]
+)
 
-    "physics": {
-        "explanation": "Physics is the study of matter, energy, motion, forces, and how objects interact with each other.",
-        "plan": [
-            "Understand the basic concepts",
-            "Learn important formulas",
-            "Study solved examples",
-            "Practice numerical problems",
-            "Review mistakes"
-        ],
-        "questions": [
-            "What is force?",
-            "What is the difference between speed and velocity?",
-            "What is Newton's second law?"
-        ]
-    }
-}
+goal = st.selectbox(
+    "🎯 What is your goal?",
+    ["Understand the topic", "Prepare for an exam", "Practice questions"]
+)
 
-# Button
-if st.button("🚀 Start Studying"):
+if st.button("🚀 Generate My Study Plan"):
 
     if not topic.strip():
-        st.warning("⚠️ Please enter a subject or topic.")
+        st.warning("⚠️ Please enter a topic first.")
 
     else:
-        topic_key = topic.lower().strip()
+        st.success(f"🎉 Study plan created for **{topic}**!")
 
-        # Use prepared content if available
-        if topic_key in study_data:
-            data = study_data[topic_key]
+        st.subheader("📋 Your Study Details")
 
-            st.success(f"🎉 Study session started for **{topic}**!")
+        st.write(f"**📚 Topic:** {topic}")
+        st.write(f"**⏱️ Available time:** {study_time}")
+        st.write(f"**📊 Level:** {difficulty}")
+        st.write(f"**🎯 Goal:** {goal}")
 
-            st.subheader("🧠 Quick Explanation")
-            st.write(data["explanation"])
+        st.divider()
 
-            st.subheader("📝 Study Plan")
+        st.subheader("📝 Recommended Study Plan")
 
-            for number, item in enumerate(data["plan"], start=1):
-                st.write(f"**{number}.** {item}")
+        if study_time == "30 minutes":
+            plan = [
+                "🧠 10 min — Learn the basic concepts",
+                "📝 10 min — Write important notes",
+                "❓ 10 min — Practice questions"
+            ]
 
-            st.subheader("❓ Practice Questions")
-
-            for number, question in enumerate(data["questions"], start=1):
-                st.write(f"**{number}.** {question}")
-
-            st.info("💡 Tip: Study one step at a time and practice what you learn.")
+        elif study_time == "1 hour":
+            plan = [
+                "🧠 20 min — Learn the core concepts",
+                "📝 15 min — Make short notes",
+                "💡 15 min — Study examples",
+                "❓ 10 min — Practice questions"
+            ]
 
         else:
-            st.success(f"🎉 Study session started for **{topic}**!")
+            plan = [
+                "🧠 30 min — Learn the fundamentals",
+                "📝 20 min — Create detailed notes",
+                "💡 30 min — Study examples",
+                "❓ 20 min — Practice questions",
+                "🔄 20 min — Revise everything"
+            ]
 
-            st.subheader("📚 General Study Plan")
+        for item in plan:
+            st.write(item)
 
-            st.write("**1. 🧠 Understand**")
-            st.write(f"Learn the basic concepts of {topic}.")
+        st.divider()
 
-            st.write("**2. 📝 Take Notes**")
-            st.write(f"Write down the important points about {topic}.")
+        st.subheader("💡 Study Tips")
 
-            st.write("**3. 💻 Practice**")
-            st.write(f"Practice questions and examples related to {topic}.")
+        st.write("✅ Keep your phone away while studying.")
+        st.write("✅ Take short breaks between study sessions.")
+        st.write("✅ Practice instead of only reading.")
+        st.write("✅ Review what you learned before finishing.")
 
-            st.write("**4. 🔄 Review**")
-            st.write(f"Revise the important concepts of {topic}.")
-
-            st.subheader("❓ Practice Questions")
-
-            st.write(f"1. What is {topic}?")
-            st.write(f"2. What are the important concepts of {topic}?")
-            st.write(f"3. Where is {topic} used?")
-
-            st.info("💡 More topics and AI-powered features can be added next!")
+        st.info(
+            "🌟 Tip: Consistent small study sessions are better "
+            "than trying to learn everything at once."
+)
