@@ -8,12 +8,11 @@ st.set_page_config(
 st.title("📚 AI Study Assistant")
 st.write("Learn smarter. Study better. 🚀")
 
+# -----------------------------
+# STUDY PLANNER
+# -----------------------------
+
 st.divider()
-
-# -----------------------------
-# STUDY PLAN
-# -----------------------------
-
 st.header("🎯 Create Your Study Plan")
 
 topic = st.text_input(
@@ -87,80 +86,153 @@ if st.button("🚀 Generate My Study Plan"):
 # -----------------------------
 
 st.divider()
-
-st.header("🧠 Quick Quiz")
+st.header("🧠 5-Question Quiz")
 
 quiz_topic = st.selectbox(
-    "Choose a quiz topic:",
+    "Choose your quiz topic:",
     ["Python", "Data Structures", "Physics"]
 )
 
-questions = {
-    "Python": {
-        "question": "Which symbol is used to create a comment in Python?",
-        "options": ["//", "#", "/*", "--"],
-        "answer": "#"
-    },
+quiz_data = {
 
-    "Data Structures": {
-        "question": "Which data structure follows FIFO?",
-        "options": ["Stack", "Queue", "Tree", "Graph"],
-        "answer": "Queue"
-    },
+    "Python": [
+        {
+            "q": "Which symbol is used to create a comment in Python?",
+            "options": ["//", "#", "/*", "--"],
+            "answer": "#"
+        },
+        {
+            "q": "Which keyword is used to define a function?",
+            "options": ["function", "define", "def", "fun"],
+            "answer": "def"
+        },
+        {
+            "q": "Which data type stores True or False?",
+            "options": ["String", "Boolean", "Integer", "Float"],
+            "answer": "Boolean"
+        },
+        {
+            "q": "Which symbol is used for exponentiation?",
+            "options": ["^", "**", "//", "%%"],
+            "answer": "**"
+        },
+        {
+            "q": "Which function displays output in Python?",
+            "options": ["display()", "show()", "print()", "output()"],
+            "answer": "print()"
+        }
+    ],
 
-    "Physics": {
-        "question": "What is the SI unit of force?",
-        "options": ["Joule", "Watt", "Newton", "Pascal"],
-        "answer": "Newton"
-    }
+    "Data Structures": [
+        {
+            "q": "Which data structure follows FIFO?",
+            "options": ["Stack", "Queue", "Tree", "Graph"],
+            "answer": "Queue"
+        },
+        {
+            "q": "Which data structure follows LIFO?",
+            "options": ["Queue", "Stack", "Array", "Graph"],
+            "answer": "Stack"
+        },
+        {
+            "q": "Which structure consists of nodes connected by edges?",
+            "options": ["Array", "Graph", "Stack", "Queue"],
+            "answer": "Graph"
+        },
+        {
+            "q": "Which data structure uses a key-value pair?",
+            "options": ["Dictionary", "Stack", "Queue", "Tree"],
+            "answer": "Dictionary"
+        },
+        {
+            "q": "What is used to connect nodes in a linked list?",
+            "options": ["Pointers", "Loops", "Arrays", "Variables"],
+            "answer": "Pointers"
+        }
+    ],
+
+    "Physics": [
+        {
+            "q": "What is the SI unit of force?",
+            "options": ["Joule", "Watt", "Newton", "Pascal"],
+            "answer": "Newton"
+        },
+        {
+            "q": "What is the SI unit of energy?",
+            "options": ["Newton", "Joule", "Watt", "Volt"],
+            "answer": "Joule"
+        },
+        {
+            "q": "What is the speed of light approximately?",
+            "options": [
+                "3 × 10⁸ m/s",
+                "3 × 10⁶ m/s",
+                "3 × 10⁴ m/s",
+                "3 × 10² m/s"
+            ],
+            "answer": "3 × 10⁸ m/s"
+        },
+        {
+            "q": "Which law explains action and reaction?",
+            "options": [
+                "Newton's First Law",
+                "Newton's Second Law",
+                "Newton's Third Law",
+                "Ohm's Law"
+            ],
+            "answer": "Newton's Third Law"
+        },
+        {
+            "q": "What is the SI unit of power?",
+            "options": ["Joule", "Watt", "Newton", "Pascal"],
+            "answer": "Watt"
+        }
+    ]
 }
 
-quiz = questions[quiz_topic]
+questions = quiz_data[quiz_topic]
 
-st.write(f"**{quiz['question']}**")
+st.write("Answer all 5 questions and check your final score!")
 
-answer = st.radio(
-    "Choose your answer:",
-    quiz["options"]
-)
+answers = []
 
-if st.button("✅ Check Answer"):
+for i, question in enumerate(questions):
+    st.write(f"### Question {i + 1}")
+    st.write(question["q"])
 
-    if answer == quiz["answer"]:
-        st.success("🎉 Correct! Great job!")
+    answer = st.radio(
+        "Choose your answer:",
+        question["options"],
+        key=f"{quiz_topic}_{i}"
+    )
 
-        st.session_state.score = st.session_state.get(
-            "score", 0
-        ) + 1
+    answers.append(answer)
 
-    else:
-        st.error(
-            f"❌ Not quite. The correct answer is **{quiz['answer']}**."
-        )
+if st.button("🏆 Submit Quiz"):
 
-# -----------------------------
-# SCORE
-# -----------------------------
+    score = 0
 
-if "score" in st.session_state:
+    for i, question in enumerate(questions):
+        if answers[i] == question["answer"]:
+            score += 1
 
     st.divider()
 
-    st.subheader("🏆 Your Progress")
+    st.subheader("🏆 Your Final Score")
 
     st.metric(
-        label="Quiz Score",
-        value=st.session_state.score
+        "Score",
+        f"{score}/5"
     )
 
-    if st.session_state.score >= 3:
-        st.success("🌟 Excellent work!")
+    if score == 5:
+        st.success("🌟 Perfect score! Excellent work!")
 
-    elif st.session_state.score >= 1:
-        st.info("💪 Keep practicing!")
+    elif score >= 3:
+        st.success("🎉 Great job! Keep practicing!")
 
     else:
-        st.info("📚 Keep learning and try again!")
+        st.info("💪 Keep studying and try the quiz again!")
 
 # -----------------------------
 # STUDY TIPS
@@ -172,5 +244,5 @@ st.subheader("💡 Study Tips")
 
 st.write("✅ Practice instead of only reading.")
 st.write("✅ Take short breaks while studying.")
-st.write("✅ Review difficult concepts again.")
-st.write("✅ Test yourself with questions.")
+st.write("✅ Review difficult concepts.")
+st.write("✅ Test yourself regularly.")
