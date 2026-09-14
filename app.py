@@ -1,4 +1,26 @@
 import streamlit as st
+# -----------------------------
+# PROFESSIONAL TECH UI
+# -----------------------------
+
+st.markdown("""
+<style>
+
+.main-title {
+    font-size: 42px;
+    font-weight: 700;
+    text-align: center;
+    margin-bottom: 5px;
+}
+
+.subtitle {
+    text-align: center;
+    font-size: 18px;
+    margin-bottom: 30px;
+}
+
+</style>
+""", unsafe_allow_html=True)
 
 # -----------------------------
 # PAGE CONFIGURATION
@@ -13,8 +35,7 @@ st.set_page_config(
 # TITLE
 # -----------------------------
 
-st.title("📚 AI Study Assistant")
-st.write("Learn smarter. Study better. 🚀")
+
 
 # -----------------------------
 # STUDY PLANNER
@@ -25,7 +46,15 @@ st.header("🎯 Create Your Study Plan")
 
 topic = st.text_input(
     "What do you want to study?",
-    placeholder="Example: Python, Data Structures, Physics"
+    placeholder="Example: Python, Data Structurest.markdown(
+    '<div class="main-title">📚 AI Study Assistant</div>',
+    unsafe_allow_html=True
+)
+
+st.markdown(
+    '<div class="subtitle">Learn smarter. Study better. 🚀</div>',
+    unsafe_allow_html=True
+)s, Physics"
 )
 
 study_time = st.selectbox(
