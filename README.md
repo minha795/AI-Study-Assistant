@@ -1,3 +1,6 @@
+## 🚀 Live Demo
+
+[Open AI Study Assistant](https://minha795-ai-study-assistant-app-lofau4.streamlit.app)
 📚 AI Study Assistant
 
 A simple and student-friendly web application designed to help engineering students organize their studies, practice concepts, create quick notes, and get useful study tips.
