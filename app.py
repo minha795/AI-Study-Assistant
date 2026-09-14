@@ -1,26 +1,4 @@
 import streamlit as st
-# -----------------------------
-# PROFESSIONAL TECH UI
-# -----------------------------
-
-st.markdown("""
-<style>
-
-.main-title {
-    font-size: 42px;
-    font-weight: 700;
-    text-align: center;
-    margin-bottom: 5px;
-}
-
-.subtitle {
-    text-align: center;
-    font-size: 18px;
-    margin-bottom: 30px;
-}
-
-</style>
-""", unsafe_allow_html=True)
 
 # -----------------------------
 # PAGE CONFIGURATION
@@ -28,14 +6,47 @@ st.markdown("""
 
 st.set_page_config(
     page_title="AI Study Assistant",
-    page_icon="📚"
+    page_icon="📚",
+    layout="centered"
+)
+
+# -----------------------------
+# PROFESSIONAL TECH UI
+# -----------------------------
+
+st.markdown(
+    """
+    <style>
+    .main-title {
+        font-size: 42px;
+        font-weight: 700;
+        text-align: center;
+        margin-bottom: 5px;
+    }
+
+    .subtitle {
+        text-align: center;
+        font-size: 18px;
+        margin-bottom: 30px;
+    }
+    </style>
+    """,
+    unsafe_allow_html=True
 )
 
 # -----------------------------
 # TITLE
 # -----------------------------
 
+st.markdown(
+    '<div class="main-title">📚 AI Study Assistant</div>',
+    unsafe_allow_html=True
+)
 
+st.markdown(
+    '<div class="subtitle">Learn smarter. Study better. 🚀</div>',
+    unsafe_allow_html=True
+)
 
 # -----------------------------
 # STUDY PLANNER
@@ -46,15 +57,7 @@ st.header("🎯 Create Your Study Plan")
 
 topic = st.text_input(
     "What do you want to study?",
-    placeholder="Example: Python, Data Structurest.markdown(
-    '<div class="main-title">📚 AI Study Assistant</div>',
-    unsafe_allow_html=True
-)
-
-st.markdown(
-    '<div class="subtitle">Learn smarter. Study better. 🚀</div>',
-    unsafe_allow_html=True
-)s, Physics"
+    placeholder="Example: Python, Data Structures, Physics"
 )
 
 study_time = st.selectbox(
@@ -121,7 +124,6 @@ if st.button("🚀 Generate My Study Plan"):
         for item in plan:
             st.write(item)
 
-
 # -----------------------------
 # QUIZ
 # -----------------------------
@@ -135,89 +137,73 @@ quiz_topic = st.selectbox(
 )
 
 quiz_data = {
-
     "Python": [
-
         {
             "q": "Which symbol is used to create a comment in Python?",
             "options": ["//", "#", "/*", "--"],
             "answer": "#"
         },
-
         {
             "q": "Which keyword is used to define a function?",
             "options": ["function", "define", "def", "fun"],
             "answer": "def"
         },
-
         {
             "q": "Which data type stores True or False?",
             "options": ["String", "Boolean", "Integer", "Float"],
             "answer": "Boolean"
         },
-
         {
             "q": "Which symbol is used for exponentiation?",
             "options": ["^", "**", "//", "%%"],
             "answer": "**"
         },
-
         {
             "q": "Which function displays output in Python?",
             "options": ["display()", "show()", "print()", "output()"],
             "answer": "print()"
         }
-
     ],
 
     "Data Structures": [
-
         {
             "q": "Which data structure follows FIFO?",
             "options": ["Stack", "Queue", "Tree", "Graph"],
             "answer": "Queue"
         },
-
         {
             "q": "Which data structure follows LIFO?",
             "options": ["Queue", "Stack", "Array", "Graph"],
             "answer": "Stack"
         },
-
         {
             "q": "Which structure consists of nodes connected by edges?",
             "options": ["Array", "Graph", "Stack", "Queue"],
             "answer": "Graph"
         },
-
         {
             "q": "Which data structure uses a key-value pair?",
             "options": ["Dictionary", "Stack", "Queue", "Tree"],
             "answer": "Dictionary"
         },
-
         {
             "q": "What is used to connect nodes in a linked list?",
             "options": ["Pointers", "Loops", "Arrays", "Variables"],
             "answer": "Pointers"
         }
-
     ],
 
     "Physics": [
-
         {
             "q": "What is the SI unit of force?",
             "options": ["Joule", "Watt", "Newton", "Pascal"],
             "answer": "Newton"
         },
-
         {
             "q": "What is the SI unit of energy?",
             "options": ["Newton", "Joule", "Watt", "Volt"],
             "answer": "Joule"
         },
-
         {
             "q": "What is the speed of light approximately?",
             "options": [
@@ -228,7 +214,6 @@ quiz_data = {
             ],
             "answer": "3 × 10⁸ m/s"
         },
-
         {
             "q": "Which law explains action and reaction?",
             "options": [
@@ -239,13 +224,11 @@ quiz_data = {
             ],
             "answer": "Newton's Third Law"
         },
-
         {
             "q": "What is the SI unit of power?",
             "options": ["Joule", "Watt", "Newton", "Pascal"],
             "answer": "Watt"
         }
-
     ]
 }
 
@@ -268,7 +251,6 @@ for i, question in enumerate(questions):
 
     answers.append(answer)
 
-
 if st.button("🏆 Submit Quiz"):
 
     score = 0
@@ -279,7 +261,6 @@ if st.button("🏆 Submit Quiz"):
             score += 1
 
     st.divider()
-
     st.subheader("🏆 Your Final Score")
 
     st.metric(
@@ -288,17 +269,13 @@ if st.button("🏆 Submit Quiz"):
     )
 
     if score == 5:
-
         st.success("🌟 Perfect score! Excellent work!")
 
     elif score >= 3:
-
         st.success("🎉 Great job! Keep practicing!")
 
     else:
-
         st.info("💪 Keep studying and try the quiz again!")
-
 
 # -----------------------------
 # STUDY TIPS
@@ -311,7 +288,6 @@ st.write("✅ Practice instead of only reading.")
 st.write("✅ Take short breaks while studying.")
 st.write("✅ Review difficult concepts.")
 st.write("✅ Test yourself regularly.")
-
 
 # -----------------------------
 # SMART NOTES GENERATOR
@@ -379,4 +355,4 @@ if st.button("📝 Generate Notes"):
         st.info(
             f"💡 Remember the definition, key concepts, "
             f"examples, and applications of {notes_topic}."
-                  )
+)
